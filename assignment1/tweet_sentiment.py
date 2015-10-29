@@ -31,6 +31,8 @@ for x in tweet_dict:
                 tscore = tscore + scores['term']
             print tscore
 
+# I want to call a function that adds up the sentiment w/in a loop
+# that grabs each tweet['text'], not the way I'm doing it above.
 
 def lines(fp):
     print str(len(fp.readlines()))
