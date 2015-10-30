@@ -2,11 +2,18 @@ import sys
 
 
 """
-Search both the AFINN file & the twitter file.
-Look for AFINN terms in each tweet.
-For tweets with AFINN terms look for additional terms that are repeated
+Search both the AFINN file & the twitter file.X
+Look for AFINN terms in each tweet.X
+tweet_sentiment does both the above
+
+For tweets with AFINN terms, create a filtered list containing these
+tweets
+
+In the filtered list look for additional terms that are repeated
 with the AFINN term.
+
 Assign some type of sentiment value to the non-AFINN terms.
+
 Return the term & it's value ('term' float(12.03))
 """
 
