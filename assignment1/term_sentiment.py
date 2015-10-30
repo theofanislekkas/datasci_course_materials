@@ -1,30 +1,30 @@
+import json
 import sys
 
 
-"""
-Search both the AFINN file & the twitter file.X
-Look for AFINN terms in each tweet.X
-tweet_sentiment does both the above
+def senti_file(sent_file):
+    scores = {}
+    for line in sent_file:
+        term, score = line.split("\t")
+        scores[term] = int(score)
+    
+    return scores
 
-For tweets with AFINN terms, create a filtered list containing these
-tweets
+def tweets(tweet_file):
+    tweet_list = []
+    for tweet in tweet_file:
+        tweet_list.append(json.loads(tweet))
 
-In the filtered list look for additional terms that are repeated
-with the AFINN term.
+    return tweet_list
 
-Assign some type of sentiment value to the non-AFINN terms.
-
-Return the term & it's value ('term' float(12.03))
-"""
-tweet_sentiment funcs
-
-def filtered_list(filtered_list):
-    #for term in filtered_list:
-        #new_sent = []
-        #if sentiment != 0:
-        #    new_sent.append(item)
-    #return new_sent
-    pass
+def filtered_list(tweet_list, scores):
+    new_list = []
+    for x in tweet_list:
+        if x.get('text'):
+            text = x.get('text').encode("ascii", "ignore")
+            for term in scores:
+                new_list.append(x)
+            return new_list
 
 def repeated_terms(new_sent):
     #repeated_terms = []
@@ -50,6 +50,9 @@ def lines(fp):
 def main():
     sent_file = open(sys.argv[1])
     tweet_file = open(sys.argv[2])
+    scores = senti_file(sent_file)
+    tweet_list = tweets(tweet_file)
+    filtered_list(tweet_list,scores)
     lines(sent_file)
     lines(tweet_file)
 
