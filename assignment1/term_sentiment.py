@@ -2,6 +2,19 @@ import json
 import sys
 
 
+STOP_TERMS = ['a','able','about','across','after','all','almost',
+  'also','am','among','an','and','any','are','as','at','be','because',
+  'been','but','by','can','cannot','could','dear','did','do','does',
+  'either','else','ever','every','for','from','get','got','had','has',
+  'have','he','her','hers','him','his','how','however','i','if','in',
+  'into','is','it','its','just','least','let','like','likely','may','me',
+  'might','most','must','my','neither','no','nor','not','of','off','often',
+  'on','only','or','other','our','own','rather','said','say','says','she',
+  'should','since','so','some','than','that','the','their','them','then',
+  'there','these','they','this','tis','to','too','twas','us','wants','was',
+  'we','were','what','when','where','which','while','who','whom','why',
+  'will','with','would','yet','you','your']
+
 def senti_file(sent_file):
     scores = {}
     for line in sent_file:
@@ -21,16 +34,18 @@ def filtered_list(tweet_list, scores):
     new_list = []
     for x in tweet_list:
         if x.get('text'):
-            text = x.get('text').encode("ascii", "ignore")
             for term in scores:
                 new_list.append(x)
             return new_list
 
-def repeated_terms(new_sent):
-    #repeated_terms = []
-    #Look for terms that are repeated
-    #create a new list of tweets with repeted terms
-    #return repeated_terms
+def repeated_terms(new_list):
+    repeated_terms = {}
+    for i in new_list:
+        text = i.get('text').encode("ascii", "ignore")
+        bag = text.split()
+
+    #count how many times the term is repeated
+    #return {term:count}
     pass
 
 def new_sentiment(repeated_terms):
@@ -52,7 +67,7 @@ def main():
     tweet_file = open(sys.argv[2])
     scores = senti_file(sent_file)
     tweet_list = tweets(tweet_file)
-    filtered_list(tweet_list,scores)
+    new_list = filtered_list(tweet_list,scores)
     lines(sent_file)
     lines(tweet_file)
 
