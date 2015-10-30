@@ -43,10 +43,24 @@ def repeated_terms(new_list):
     for i in new_list:
         text = i.get('text').encode("ascii", "ignore")
         bag = text.split()
+        for wrd in bag:
+            if wrd in STOP_TERMS:
+                bag.remove(wrd)
 
     #count how many times the term is repeated
     #return {term:count}
-    pass
+
+"""
+Should I be doing a word count?  It seems as though that I should use the
+AFINN terms to lookup repeated terms.  Something like:
+
+    asd = scores[term]
+    if asd in x.get('text'):
+        I'm actually stumped here.
+        What I want to find is what terms are most frequently used with
+        scores[term].  Then assign some values to those new terms (based
+        on count probably.)
+"""
 
 def new_sentiment(repeated_terms):
     #if sentiment > 0:
@@ -68,6 +82,7 @@ def main():
     scores = senti_file(sent_file)
     tweet_list = tweets(tweet_file)
     new_list = filtered_list(tweet_list,scores)
+    repeated_terms(new_list)
     lines(sent_file)
     lines(tweet_file)
 
