@@ -2,19 +2,6 @@ import json
 import sys
 
 
-STOP_TERMS = ['a','able','about','across','after','all','almost',
-  'also','am','among','an','and','any','are','as','at','be','because',
-  'been','but','by','can','cannot','could','dear','did','do','does',
-  'either','else','ever','every','for','from','get','got','had','has',
-  'have','he','her','hers','him','his','how','however','i','if','in',
-  'into','is','it','its','just','least','let','like','likely','may','me',
-  'might','most','must','my','neither','no','nor','not','of','off','often',
-  'on','only','or','other','our','own','rather','said','say','says','she',
-  'should','since','so','some','than','that','the','their','them','then',
-  'there','these','they','this','tis','to','too','twas','us','wants','was',
-  'we','were','what','when','where','which','while','who','whom','why',
-  'will','with','would','yet','you','your']
-
 def senti_file(sent_file):
     scores = {}
     for line in sent_file:
@@ -38,17 +25,6 @@ def filtered_list(tweet_list, scores):
                 new_list.append(x)
             return new_list
 
-def repeated_terms(new_list):
-    repeated_terms = {}
-    for i in new_list:
-        text = i.get('text').encode("ascii", "ignore")
-        bag = text.split()
-        for wrd in bag:
-            if wrd in STOP_TERMS:
-                bag.remove(wrd)
-
-    #count how many times the term is repeated
-    #return {term:count}
 
 """
 Should I be doing a word count?  It seems as though that I should use the
