@@ -1,3 +1,1 @@
-CREATE TABLE trans AS SELECT term, docid, count FROM frequency;
-
-SELECT a.docid, b.term, SUM(a.count*b.count) FROM frequency as a, trans as b WHERE a.term=b.docid GROUP BY a.docid, b.term;
+SELECT a.docid, b.docid, SUM(a.count*b.count) FROM Frequency as a, Frequency as b WHERE a.term=b.term AND a.docid='10080_txt_crude' AND b.docid='7035_txt_earn' GROUP BY a.docid, b.docid;
