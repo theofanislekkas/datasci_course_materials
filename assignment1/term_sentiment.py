@@ -17,14 +17,29 @@ def tweets(tweet_file):
 
     return tweet_list
 
-def filtered_list(tweet_list, scores):
-    new_list = []
+def sentiment(tweet_list, scores):
     for x in tweet_list:
         if x.get('text'):
+            tscore = 0
+            text = x.get('text').encode("ascii", "ignore")
+            bag = text.split()
             for term in scores:
-                new_list.append(x)
-            return new_list
+                if term in bag:
+                    # import ipdb;ipdb.set_trace()
+                    sent = bag.count(term)
+                    tscore += sent*scores[term]
+            return tscore
 
+def new_sentiment(tweet_list, tscore, scores):
+    for x in tweet_list:
+        if x.get('text'):
+            if term not in scores:
+                if tscore > 0:
+                    term value += 1
+                elif tscore < 0:
+                    term value -= 1
+                else:
+                    return x, value
 
 """
 Should I be doing a word count?  It seems as though that I should use the
@@ -38,17 +53,6 @@ AFINN terms to lookup repeated terms.  Something like:
         on count probably.)
 """
 
-def new_sentiment(repeated_terms):
-    #if sentiment > 0:
-    #    total = new_term.count()
-    #    new_sent_score = total*some_value
-    #else:
-    #    if sentiment < 0:
-    #        total = new_term.count()
-        #    new_sent_score = total*some_value
-    #return new_term, new_score
-    pass
-
 def lines(fp):
     print str(len(fp.readlines()))
 
@@ -57,8 +61,7 @@ def main():
     tweet_file = open(sys.argv[2])
     scores = senti_file(sent_file)
     tweet_list = tweets(tweet_file)
-    new_list = filtered_list(tweet_list,scores)
-    repeated_terms(new_list)
+    new_sentiment(tweet_list, tscore, scores)
     lines(sent_file)
     lines(tweet_file)
 
