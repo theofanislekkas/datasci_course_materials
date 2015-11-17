@@ -41,18 +41,6 @@ def new_sentiment(tweet_list, tscore, scores):
                 else:
                     return x, value
 
-"""
-Should I be doing a word count?  It seems as though that I should use the
-AFINN terms to lookup repeated terms.  Something like:
-
-    asd = scores[term]
-    if asd in x.get('text'):
-        I'm actually stumped here.
-        What I want to find is what terms are most frequently used with
-        scores[term].  Then assign some values to those new terms (based
-        on count probably.)
-"""
-
 def lines(fp):
     print str(len(fp.readlines()))
 
