@@ -1,4 +1,5 @@
 import json
+import string
 import sys
 
 
@@ -25,21 +26,27 @@ def sentiment(tweet_list, scores):
             bag = text.split()
             for term in scores:
                 if term in bag:
-                    # import ipdb;ipdb.set_trace()
                     sent = bag.count(term)
                     tscore += sent*scores[term]
             return tscore
 
 def new_sentiment(tweet_list, tscore, scores):
     for x in tweet_list:
+        term = ''
+        value = 0
         if x.get('text'):
-            if term not in scores:
-                if tscore > 0:
-                    term value += 1
-                elif tscore < 0:
-                    term value -= 1
-                else:
-                    return x, value
+            text = x.get('text').encode("ascii", "ignore")
+            exclude = set(string.punctuation + string.digits)
+            temp = ''.join(c for c in text if c not in exclude)
+            bag = temp.split()
+            for term in bag:
+                if term not in scores:
+                    if tscore > 0:
+                        value += 1
+                    elif tscore < 0:
+                        value -= 1
+        if value != 0:
+            print str(term), float(value)
 
 def lines(fp):
     print str(len(fp.readlines()))
@@ -49,9 +56,8 @@ def main():
     tweet_file = open(sys.argv[2])
     scores = senti_file(sent_file)
     tweet_list = tweets(tweet_file)
+    tscore = sentiment(tweet_list, scores)
     new_sentiment(tweet_list, tscore, scores)
-    lines(sent_file)
-    lines(tweet_file)
 
 if __name__ == '__main__':
     main()
