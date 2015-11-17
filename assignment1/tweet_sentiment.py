@@ -26,7 +26,6 @@ def sentiment(tweet_list, scores):
             bag = text.split()
             for term in scores:
                 if term in bag:
-                    # import ipdb;ipdb.set_trace()
                     sent = bag.count(term)
                     tscore += sent*scores[term]
             print tscore
