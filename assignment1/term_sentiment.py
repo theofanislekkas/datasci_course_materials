@@ -46,7 +46,7 @@ def new_sentiment(tweet_list, tscore, scores):
                     elif tscore < 0:
                         value -= 1
         if value != 0:
-            print str(term), float(value)
+            print term, float(value)
 
 def lines(fp):
     print str(len(fp.readlines()))
