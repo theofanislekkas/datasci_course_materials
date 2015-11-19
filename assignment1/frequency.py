@@ -18,9 +18,8 @@ def tweet_count(tweet_list):
         if x.get('text'):
             text = x.get('text').encode("ascii", "ignore")
             exclude = set(string.punctuation + string.digits)
-            temp = ''.join(c for c in text if c not in exclude)
-            bag = temp.split().lower()
-            bag.lower()
+            temp = ''.join(c for c in text if c not in exclude).lower()
+            bag = temp.split()
             for term in bag:
                 count += 1
         if count != 0:
