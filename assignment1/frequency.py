@@ -20,6 +20,7 @@ def tweet_count(tweet_list):
             exclude = set(string.punctuation + string.digits)
             temp = ''.join(c for c in text if c not in exclude).lower()
             bag = temp.split()
+            bag = [x for x in bag if 'http' not in x]
             for term in bag:
                 count += 1
         if count != 0:
