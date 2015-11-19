@@ -31,14 +31,16 @@ def sentiment(tweet_list, scores):
             return tscore
 
 def new_sentiment(tweet_list, tscore, scores):
+    term_dict = {}
     for x in tweet_list:
         term = ''
         value = 0
         if x.get('text'):
-            text = x.get('text').encode("ascii", "ignore")
+            text = x.get('text').encode("ascii", "ignore").lower()
             exclude = set(string.punctuation + string.digits)
             temp = ''.join(c for c in text if c not in exclude)
             bag = temp.split()
+            bag = [x for x in bag if 'http' not in x]
             for term in bag:
                 if term not in scores:
                     if tscore > 0:
@@ -46,7 +48,11 @@ def new_sentiment(tweet_list, tscore, scores):
                     elif tscore < 0:
                         value -= 1
         if value != 0:
-            print term, float(value)
+            term_dict.update({term: float(value)})
+
+    for key, value in term_dict.iteritems():
+        # import ipdb;ipdb.set_trace()
+        print key, value
 
 def lines(fp):
     print str(len(fp.readlines()))
