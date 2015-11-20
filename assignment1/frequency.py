@@ -24,6 +24,7 @@ def tweet_count(tweet_list):
             for term in bag:
                 count += 1
         if count != 0:
+            count = count + count
             count_list.update({term: float(count)})
         
     return count_list
