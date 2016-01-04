@@ -34,7 +34,7 @@ def new_sentiment(tweet_list, tscore, scores):
     term_dict = {}
     for x in tweet_list:
         term = ''
-        value = 0
+        value = 0.0
         if x.get('text'):
             text = x.get('text').encode("ascii", "ignore").lower()
             exclude = set(string.punctuation + string.digits)
@@ -43,11 +43,11 @@ def new_sentiment(tweet_list, tscore, scores):
             bag = [x for x in bag if 'http' not in x]
             for term in bag:
                 if term not in scores:
-                    if tscore > 0:
-                        value += 1
-                    elif tscore < 0:
-                        value -= 1
-        if value != 0:
+                    if tscore > 0.0:
+                        value += 1.0
+                    elif tscore < 0.0:
+                        value -= 1.0
+        if value != 0.0:
             term_dict.update({term: float(value)})
 
     for key, value in term_dict.iteritems():
